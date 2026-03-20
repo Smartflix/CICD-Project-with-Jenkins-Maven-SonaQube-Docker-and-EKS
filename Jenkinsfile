@@ -45,7 +45,7 @@ pipeline {
 
         stage('CQA') {
             steps {
-                withSonarQubeEnv('soner-server') {   // Name must match SonarQube server in Configure System
+                withSonarQubeEnv('soner-scanner') {   // Name must match SonarQube server in Configure System
                     sh """
                         "${SCANNER_HOME}/bin/sonar-scanner" \
                           -Dsonar.projectName=register-app-pipeline \
