@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        SCANNER_HOME = tool 'sonarqube-scannar'
+        SCANNER_HOME = tool 'sonarqube-scannar'  // tool name from Global Tool Configuration
     }
 
     stages {
@@ -45,7 +45,7 @@ pipeline {
 
         stage('CQA') {
             steps {
-                withSonarQubeEnv('soner-scanner') {   // Name must match SonarQube server in Configure System
+                withSonarQubeEnv('sonar-scanner') {   // server name from Configure System -> SonarQube servers
                     sh """
                         "${SCANNER_HOME}/bin/sonar-scanner" \
                           -Dsonar.projectName=register-app-pipeline \
@@ -58,4 +58,3 @@ pipeline {
         }
     }
 }
-
