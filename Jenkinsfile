@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        SCANNER_HOME = tool 'sonarqube-scannar'  // tool name from Global Tool Configuration
+        SCANNER_HOME = tool 'sonarqube-scannar'
     }
 
     stages {
@@ -45,7 +45,7 @@ pipeline {
 
         stage('CQA') {
             steps {
-                withSonarQubeEnv('sonar-scanner') {   // server name from Configure System -> SonarQube servers
+                withSonarQubeEnv('sonar-scanner') {
                     sh """
                         "${SCANNER_HOME}/bin/sonar-scanner" \
                           -Dsonar.projectName=register-app-pipeline \
@@ -56,13 +56,28 @@ pipeline {
                 }
             }
         }
+
+        stage('Debug user on agent') {
+            steps {
+                sh '''
+                  echo "WHOAMI:" && whoami
+                  echo "ID:" && id
+                  echo "GROUPS:" && groups
+                  echo "HOSTNAME:" && hostname
+                  echo "DOCKER PS:" && docker ps || echo "docker ps failed"
+                '''
+            }
+        }
+
         stage('build & tag docker image') {
             steps {
-                script{
-                  withDockerRegistry(credentialsId: 'dockerhub-cred') {
-                     sh 'docker build -t fabulousjeff2009/register-app:latest .'  
-                    }  
-               
+                script {
+                    withDockerRegistry(
+                        credentialsId: 'dockerhub-cred',
+                        url: 'https://index.docker.io/v1/'
+                    ) {
+                        sh 'docker build -t fabulousjeff2009/register-app:latest .'
+                    }
                 }
             }
         }
