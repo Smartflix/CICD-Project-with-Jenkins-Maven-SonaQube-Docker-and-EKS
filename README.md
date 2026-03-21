@@ -12,13 +12,16 @@ Steps to do th eproject.
 spin 3 servers for jenkins ,Sonarqube and  EKS 
 Run the following command in the jenkins: 
 Install the dependancy
+```
 ## Install Java
-$ sudo apt update
-$ sudo apt upgrade
-$ sudo nano /etc/hostname
-$ sudo init 6
-$ sudo apt install openjdk-17-jre
-$ java -version
+sudo apt update
+sudo apt upgrade
+sudo nano /etc/hostname
+sudo init 6
+sudo apt install openjdk-17-jre
+java -version
+
+```
 
 ## Install Jenkins
 ```
