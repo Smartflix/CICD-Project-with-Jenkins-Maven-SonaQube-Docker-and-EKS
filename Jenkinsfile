@@ -81,5 +81,10 @@ pipeline {
                 }
             }
         }
+         stage('Trivy Image Scan') {
+            steps {
+                sh 'trivy image --format table -o image.html fabulousjeff2009/register-app:latest'
+            }
+        }
     }
 }
