@@ -1,9 +1,10 @@
+```
 End-to-End CI/CD Pipeline with Jenkins, Maven, SonarQube, Docker & AWS EKS
 I just completed  a fully automated CI/CD pipeline for a Java web application, covering everything from source code to production deployment on Kubernetes
 
 Tools I used to build during the project include:
 Jenkins | Maven | SonarQube | Docker | Trivy | AWS EKS | Kubernetes | ArgoCD | GitHub | GitOps
-Key highlights:
+## Key highlights:
 •	Zero manual deployments — every code push triggers a full build, test, scan, and deploy cycle
 •	GitOps approach keeps the deployment state version-controlled in Git
 •	SonarQube quality gate and Trivy security scan run on every build before any image is pushed
@@ -12,6 +13,7 @@ Steps to do th eproject.
 spin 3 servers for jenkins ,Sonarqube and  EKS 
 Run the following command in the jenkins (server1): 
 Install the dependancy
+```
 ```
 ## Install Java
 sudo apt update
