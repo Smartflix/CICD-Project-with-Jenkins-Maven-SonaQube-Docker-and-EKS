@@ -57,18 +57,6 @@ pipeline {
             }
         }
 
-        stage('Debug user on agent') {
-            steps {
-                sh '''
-                  echo "WHOAMI:" && whoami
-                  echo "ID:" && id
-                  echo "GROUPS:" && groups
-                  echo "HOSTNAME:" && hostname
-                  echo "DOCKER PS:" && docker ps || echo "docker ps failed"
-                '''
-            }
-        }
-
         stage('build & tag docker image') {
             steps {
                 script {
@@ -81,10 +69,31 @@ pipeline {
                 }
             }
         }
-         stage('Trivy Image Scan') {
+
+        stage('Trivy Image Scan') {
             steps {
                 sh 'trivy image --format table -o image.html fabulousjeff2009/register-app:latest'
             }
         }
-    }
-}
+
+        stage('push docker image') {
+            steps {
+                script {
+                    withDockerRegistry(
+                        credentialsId: 'dockerhub-cred',
+                        url: 'https://index.docker.io/v1/'
+                    ) {
+                        sh 'docker push fabulousjeff2009/register-app:latest'
+                    }
+                }
+            }
+        }
+
+        stage('cleanup Artifacts') {
+            steps {
+                sh 'docker rmi fabulousjeff2009/register-app:latest'
+            }
+        }
+
+    }  
+}      
