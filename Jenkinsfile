@@ -56,11 +56,13 @@ pipeline {
                 }
             }
         }
-        stage('quality gate') {
+        stage('build & tag docker image') {
             steps {
                 script{
-                    
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube'
+                  withDockerRegistry(credentialsId: 'dockerhub-cred') {
+                     sh 'docker build -t fabulousjeff2009/register-app:latest .'  
+                    }  
+               
                 }
             }
         }
