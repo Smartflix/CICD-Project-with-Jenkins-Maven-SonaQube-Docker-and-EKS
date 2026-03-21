@@ -31,10 +31,16 @@
     <p>Already have an account? <a href="#">Sign in</a>.</p>
   </div>
 
-   <h1> Thank You </h1>
-    <h1> Happy Learning .</h1>
+   <h1> Thank You </h>
    <br>
    <h1> Happy Learning. See You Again. </h1>
     <h1> Happy Learning. See You Again. </h1>
+    <h1> Happy Learning. See You Again. </h1>
+    <h1> Happy Learning. See You Again. </h1>
+
+
+
+<h1> Happy Learning. See You Again. </h1>
+    <h1> There is a new development kindly check jira and fix before the close of business </h1>
 
 </form> 
