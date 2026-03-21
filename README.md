@@ -10,7 +10,7 @@ Key highlights:
 
 Steps to do th eproject.
 spin 3 servers for jenkins ,Sonarqube and  EKS 
-Run the following command in the jenkins: 
+Run the following command in the jenkins (server1): 
 Install the dependancy
 ```
 ## Install Java
@@ -45,4 +45,8 @@ sudo service sshd reload
 ssh-keygen OR $ ssh-keygen -t ed25519
 cd .ssh
 ```
+```
 $ install docker in the jenkins server if the size is large or you can use a slave to do the job .
+sudo apt install docker.io -y
+
+
