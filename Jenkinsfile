@@ -50,7 +50,7 @@ pipeline {
                         "${SCANNER_HOME}/bin/sonar-scanner" \
                           -Dsonar.projectName=register-app-pipeline \
                           -Dsonar.projectKey=register-app-pipeline \
-                          -Dsonar.java.binaries=target \
+                          -Dsonar.java.binaries=webapp/target \
                           -Dsonar.java.source=17
                     """
                 }
