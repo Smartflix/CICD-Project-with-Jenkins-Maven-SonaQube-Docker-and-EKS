@@ -8,6 +8,7 @@ pipeline {
 
     environment {
         SCANNER_HOME = tool 'sonarqube-scannar'
+        IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
     stages {
@@ -64,7 +65,7 @@ pipeline {
                         credentialsId: 'dockerhub-cred',
                         url: 'https://index.docker.io/v1/'
                     ) {
-                        sh 'docker build -t fabulousjeff2009/register-app:latest .'
+                        sh "docker build -t fabulousjeff2009/register-app:${IMAGE_TAG} ."
                     }
                 }
             }
@@ -72,7 +73,7 @@ pipeline {
 
         stage('Trivy Image Scan') {
             steps {
-                sh 'trivy image --format table -o image.html fabulousjeff2009/register-app:latest'
+                sh "trivy image --format table -o image.html fabulousjeff2009/register-app:${IMAGE_TAG}"
             }
         }
 
@@ -83,7 +84,7 @@ pipeline {
                         credentialsId: 'dockerhub-cred',
                         url: 'https://index.docker.io/v1/'
                     ) {
-                        sh 'docker push fabulousjeff2009/register-app:latest'
+                        sh "docker push fabulousjeff2009/register-app:${IMAGE_TAG}"
                     }
                 }
             }
@@ -91,9 +92,19 @@ pipeline {
 
         stage('cleanup Artifacts') {
             steps {
-                sh 'docker rmi fabulousjeff2009/register-app:latest'
+                sh "docker rmi fabulousjeff2009/register-app:${IMAGE_TAG}"
             }
         }
 
-    }  
-}      
+        stage('Trigger CD Pipeline') {
+            steps {
+                build job: 'cd-deployment',
+                      wait: false,
+                      parameters: [
+                          string(name: 'image_tag', value: "${IMAGE_TAG}")
+                      ]
+            }
+        }
+
+    }
+}
