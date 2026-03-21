@@ -44,9 +44,19 @@ sudo nano /etc/ssh/sshd_config
 sudo service sshd reload
 ssh-keygen OR $ ssh-keygen -t ed25519
 cd .ssh
+condigure the jenkins so you can get the GUI
 ```
 ```
 $ install docker in the jenkins server if the size is large or you can use a slave to do the job .
 sudo apt install docker.io -y
+## server 2
+## install sonarqube
+## install docker in the server then use docker to pull sonarqube from docker hub repository.
+```
+```
+sudo apt install docker.io -y
+docker run -d -p 8081:8081 sonarqube
+## this will pull docker image and run it at the same time
+## configure the sonarqube .
 
 
