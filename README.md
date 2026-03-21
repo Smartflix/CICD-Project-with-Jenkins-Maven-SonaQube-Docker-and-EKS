@@ -35,10 +35,12 @@ sudo apt-get update
 sudo apt-get install jenkins
 ```
 
-$ sudo systemctl enable jenkins       //Enable the Jenkins service to start at boot
-$ sudo systemctl start jenkins        //Start Jenkins as a service
-$ systemctl status jenkins
-$ sudo nano /etc/ssh/sshd_config
-$ sudo service sshd reload
-$ ssh-keygen OR $ ssh-keygen -t ed25519
-$ cd .ssh
+```
+sudo systemctl enable jenkins       //Enable the Jenkins service to start at boot
+sudo systemctl start jenkins        //Start Jenkins as a service
+systemctl status jenkins
+sudo nano /etc/ssh/sshd_config
+sudo service sshd reload
+ssh-keygen OR $ ssh-keygen -t ed25519
+cd .ssh
+```
